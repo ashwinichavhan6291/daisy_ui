@@ -41,46 +41,47 @@ function ProfileEdit() {
     <>
       <ToastContainer />
 
-      <div className="flex flex-col md:flex-row justify-center items-center min-h-screen p-6 md:p-10">
-        {/* Form Section */}
-        <div className="card bg-base-content text-white max-w-2xl w-full shadow-xl p-6 mx-auto">
-          <div className="card-body">
-            <h2 className="card-title text-center text-lg">Edit Profile</h2>
+      <div className="flex flex-col md:flex-row justify-center items-center max-h-screen px-4 py-6 md:px-10">
+  <div className="card bg-base-content text-white w-full max-w-lg shadow-xl p-6 md:p-8 mx-auto">
+    <div className="card-body">
+      <h2 className="card-title text-center text-xl md:text-2xl">Edit Profile</h2>
 
-            <div className="gap-4 w-auto">
-              {[
-                { label: "First Name", value: firstName, setter: setFirstName },
-                { label: "Last Name", value: lastName, setter: setLastName },
-                { label: "Skills", value: skills, setter: setSkills },
-                { label: "Age", value: age, setter: setAge },
-                { label: "Gender", value: gender, setter: setGender },
-                { label: "About", value: about, setter: setAbout },
-                { label: "Photo URL", value: photourl, setter: setPhotourl },
-              ].map((field, index) => (
-                <label key={index} className="form-control w-full">
-                  <div className="label">
-                    <span className="label-text text-white">{field.label}</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={field.value || ""}
-                    className="input input-bordered w-full text-black"
-                    onChange={(e) => field.setter(e.target.value)}
-                  />
-                </label>
-              ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {[
+          { label: "First Name", value: firstName, setter: setFirstName },
+          { label: "Last Name", value: lastName, setter: setLastName },
+          { label: "Skills", value: skills, setter: setSkills },
+          { label: "Age", value: age, setter: setAge },
+          { label: "Gender", value: gender, setter: setGender },
+          { label: "About", value: about, setter: setAbout },
+          { label: "Photo URL", value: photourl, setter: setPhotourl },
+        ].map((field, index) => (
+          <label key={index} className="form-control w-full">
+            <div className="label">
+              <span className="label-text text-white">{field.label}</span>
             </div>
-
-            <div className="card-actions justify-center mt-4">
-              <button className="btn btn-primary w-full md:w-auto" onClick={saveProfile}>
-                Save Profile
-              </button>
-            </div>
-          </div>
-        </div>
+            <input
+              type="text"
+              value={field.value || ""}
+              className="input input-bordered w-full text-black"
+              onChange={(e) => field.setter(e.target.value)}
+            />
+          </label>
+        ))}
       </div>
 
-      {/* Profile Preview Section */}
+      <div className="card-actions flex justify-center mt-6">
+        <button className="btn btn-primary w-full md:w-auto px-6" onClick={saveProfile}>
+          Save Profile
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+     
       <Profile userData={{ firstName, lastName, gender, age, photourl, skills, about }} profile={profile} />
     </>
   );

@@ -25,6 +25,9 @@ function UserCard() {
   }, []);
 
   const handleRequest = async (status, userId) => {
+    
+    handleUser(); 
+  
     try {
       const res = await axios.post(
         `${Base_URL}/request/send/${status}/${userId}`,
@@ -34,13 +37,10 @@ function UserCard() {
       toast.success(res.data.message);
       dispatch(removeFeed(userId));
     } catch (err) {
-      toast.error(
-        err.response && err.response.data && err.response.data.error
-          ? err.response.data.error
-          : err.message
-      );
+      toast.error(err.response?.data?.error || err.message);
     }
   };
+  
 
   const handleUser = () => {
     setCurrIndex((prev) => (prev + 1) % feeds.length);
@@ -54,7 +54,7 @@ function UserCard() {
   return (
     <>
       <ToastContainer />
-      <div className="flex justify-center items-center min-h-screen px-4">
+      <div className="flex justify-center items-center min-h-screen px-4 bg-slate-600">
         <AnimatePresence mode="wait">
           <motion.div
             key={feed._id}
@@ -64,7 +64,7 @@ function UserCard() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-2xl shadow-lg p-6 text-center w-full max-w-md border border-gray-300"
           >
-            {/* Profile Image */}
+           
             <figure className="mb-4">
               <img
                 src={feed.photourl}
@@ -73,7 +73,7 @@ function UserCard() {
               />
             </figure>
 
-            {/* User Details */}
+           
             <div className="space-y-2">
               <h2 className="text-xl font-bold text-gray-800">
                 {feed.firstName} {feed.lastName}
@@ -85,7 +85,7 @@ function UserCard() {
               <p className="text-sm text-gray-500">{feed.about}</p>
             </div>
 
-            {/* Action Buttons */}
+         
             <div className="mt-4 flex flex-wrap justify-center gap-3">
               <button
                 className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-600 transition"

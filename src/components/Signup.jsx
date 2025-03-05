@@ -31,86 +31,72 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 to-purple-600">
-      <ToastContainer />
-      {!submitted && (
-        <motion.form
-          onSubmit={handleSubmit(handleOnSubmit)}
-          className="formContainer bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-lg w-96 text-center"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.h2
-            className="signupHeading text-white text-2xl font-bold mb-6"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Sign Up
-          </motion.h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-50 p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+  <motion.form
+    onSubmit={handleSubmit(handleOnSubmit )}
+    className="bg-black/30 backdrop-blur-md p-6 sm:p-8 rounded-xl shadow-lg w-11/12 max-w-md min-h-[350px] text-center"
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    <h2 className="text-white text-2xl font-bold mb-6">Sign Up</h2>
 
-          <div className="mb-4">
-            <input
-              type="text"
-              className="form-control inputField w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
-              {...register("firstName", { required: "First Name is required", minLength: { value: 4, message: "At least 4 characters" } })}
-              placeholder="Enter First Name"
-            />
-            {errors.firstName && <p className="text-red-400 text-sm">{errors.firstName.message}</p>}
-          </div>
-
-          <div className="mb-4">
-            <input
-              type="text"
-              className="form-control inputField w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
-              {...register("lastName", { required: "Last Name is required", minLength: { value: 4, message: "At least 4 characters" } })}
-              placeholder="Enter Last Name"
-            />
-            {errors.lastName && <p className="text-red-400 text-sm">{errors.lastName.message}</p>}
-          </div>
-
-          <div className="mb-4">
-            <input
-              type="email"
-              className="form-control inputField w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
-              {...register("emailId", {
-                required: "Email is required",
-                pattern: { value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, message: "Invalid email format" },
-              })}
-              placeholder="Enter Email Address"
-            />
-            {errors.emailId && <p className="text-red-400 text-sm">{errors.emailId.message}</p>}
-          </div>
-
-          <div className="mb-6">
-            <input
-              type="password"
-              className="form-control inputField w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
-              {...register("password", {
-                required: "Password is required",
-                minLength: { value: 8, message: "At least 8 characters" },
-                pattern: {
-                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
-                  message: "Must contain uppercase, number, and special character",
-                },
-              })}
-              placeholder="Enter Password"
-            />
-            {errors.password && <p className="text-red-400 text-sm">{errors.password.message}</p>}
-          </div>
-
-          <motion.button
-            type="submit"
-            className="btn-primary btn w-full bg-indigo-500 text-white font-bold py-2 rounded-md hover:bg-indigo-600 transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Sign Up
-          </motion.button>
-        </motion.form>
-      )}
+    <div className="mb-4">
+      <input
+        type="text"
+        className="w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
+        {...register("firstName", { required: "First Name is required", minLength: { value: 4, message: "At least 4 characters" } })}
+        placeholder="Enter First Name"
+      />
+      {errors.firstName && <p className="text-red-400 text-sm">{errors.firstName.message}</p>}
     </div>
+
+    <div className="mb-4">
+      <input
+        type="text"
+        className="w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
+        {...register("lastName", { required: "Last Name is required", minLength: { value: 4, message: "At least 4 characters" } })}
+        placeholder="Enter Last Name"
+      />
+      {errors.lastName && <p className="text-red-400 text-sm">{errors.lastName.message}</p>}
+    </div>
+
+    <div className="mb-4">
+      <input
+        type="email"
+        className="w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
+        {...register("emailId", { required: "Email is required", pattern: { value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, message: "Invalid email format" } })}
+        placeholder="Enter Email"
+      />
+      {errors.emailId && <p className="text-red-400 text-sm">{errors.emailId.message}</p>}
+    </div>
+
+    <div className="mb-6">
+      <input
+        type="password"
+        className="w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
+        {...register("password", {
+          required: "Password is required",
+          minLength: { value: 8, message: "At least 8 characters" },
+          pattern: { value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/, message: "Must contain uppercase, number, and special character" },
+        })}
+        placeholder="Enter Password"
+      />
+      {errors.password && <p className="text-red-400 text-sm">{errors.password.message}</p>}
+    </div>
+
+    <motion.button
+      type="submit"
+      className="w-full bg-indigo-500 text-white font-bold py-2 rounded-md hover:bg-indigo-600 transition-all"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      Sign Up
+    </motion.button>
+  </motion.form>
+</div>
+
+
   );
 };
 

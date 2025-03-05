@@ -11,7 +11,11 @@ function HomePage() {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.post(Base_URL + "/logout", {}, { withCredentials: true });
+      const res = await axios.post(
+        Base_URL + "/logout",
+        {},
+        { withCredentials: true }
+      );
       toast.success(res.data);
     } catch (err) {
       console.error(err.response ? err.response.data : err.message);
@@ -21,9 +25,8 @@ function HomePage() {
   return (
     <>
       <ToastContainer />
-      <div className="flex flex-col md:flex-row min-h-screen relative">
-
-        {/* Sidebar Background Overlay */}
+      <div className="flex flex-col md:flex-row min-h-screen relative z-0 overflow-y-hidden">
+    
         {sidebarOpen && (
           <div
             className="fixed inset-0 bg-black bg-opacity-50 md:hidden transition-opacity"
@@ -31,9 +34,9 @@ function HomePage() {
           ></div>
         )}
 
-        {/* Mobile Sidebar Toggle Button */}
+     
         <button
-          className="absolute top-4 left-4 z-50 text-white md:hidden"
+          className="absolute top-20 left-4 z-50 text-white md:hidden"
           onClick={() => setSidebarOpen(true)}
         >
           <FiMenu size={30} />
@@ -41,13 +44,13 @@ function HomePage() {
 
         {/* Sidebar */}
         <motion.div
-          className={`fixed md:relative top-0 left-0 h-screen bg-gray-900 p-5 pt-8 w-64 z-50 transition-transform duration-300 ${
+          className={`fixed md:relative top-10 left-0 max-h-full bg-gray-900 p-5 pt-8 w-64 z-10 transition-transform duration-300 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0`}
         >
           {/* Close Button (Mobile Only) */}
           <button
-            className="absolute top-4 right-4 text-white md:hidden"
+            className="absolute top-10 right-4 text-white md:hidden"
             onClick={() => setSidebarOpen(false)}
           >
             <FiX size={30} />
@@ -79,43 +82,33 @@ function HomePage() {
             ))}
           </ul>
 
-          
-          <motion.div
-            className="mt-5 md:absolute md:bottom-5 md:left-5 flex justify-center md:justify-start text-white"
-            whileHover={{ scale: 1.1 }}
+          <li
+            className="text-white list-none mt-4 md:mt-10 hover:text-blue-400 text-center md:text-left cursor-pointer"
+            onClick={handleLogout}
           >
-            <button className="btn btn-ghost transition-all" onClick={handleLogout}>
-              Logout
-            </button>
-          </motion.div>
+            Logout
+          </li>
         </motion.div>
 
-        
         <motion.div
-          className="hero bg-slate-200 flex flex-col md:flex-row min-h-screen items-center p-5 md:p-10 gap-5 md:gap-10 w-full"
+          className="hero bg-slate-200 flex flex-col md:flex-row min-h-screen p-5 md:p-10 gap-5 md:gap-10 overflow-hidden"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
         >
-         
-          <div className="hero-content text-center md:text-left w-full md:w-1/2">
-            <h1 className="text-3xl md:text-5xl font-bold text-black">
-              Let's create something amazing
-            </h1>
-            <p className="py-4 md:py-6 text-lg md:text-3xl">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis aliquid officia repellendus adipisci assumenda maiores ducimus placeat modi error aut.
-            </p>
+         <div className="hero-content flex flex-col items-center text-center w-full">
+  <h1 className="text-3xl md:text-5xl font-bold text-black">
+    Let's create something amazing
+  </h1>
+  <p className="py-4 md:py-6 text-lg md:text-3xl">
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
+    aliquid officia repellendus adipisci assumenda maiores ducimus
+    placeat modi error aut.
+  </p>
+</div>
 
-      
-            <motion.div whileHover={{ scale: 1.1 }}>
-              <Link to="/signup" className="btn btn-primary bg-blue-500 hover:bg-green-500 text-black px-6 py-3 rounded-md">
-                Get Started
-              </Link>
-            </motion.div>
-          </div>
 
-          
-          <div className="w-full md:w-1/3 flex justify-center">
+          <div className="pt-20 w-full md:w-1/2 flex justify-center">
             <motion.img
               src="https://images.pexels.com/photos/4348078/pexels-photo-4348078.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               alt="post"

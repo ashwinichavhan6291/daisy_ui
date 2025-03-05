@@ -42,7 +42,7 @@ function CreatePost() {
     <>
       <ToastContainer />
 
-      <div className="flex justify-center items-center min-h-screen bg-gray-900 p-6">
+      <div className="flex justify-center items-center min-h-screen bg-slate-600 p-6">
         <div className="bg-white shadow-lg rounded-lg 
                         w-[90%] xs:w-[90%] sm:w-[80%] md:w-[75%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%]
                         max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 

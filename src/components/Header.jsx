@@ -10,7 +10,7 @@ function Header({ setShowSignup, setShowLogin, showLogin, showSignup }) {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <motion.button
-        className="btn btn-ghost text-xl"
+        className="btn btn-ghost text-xl left-10 top-9"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
