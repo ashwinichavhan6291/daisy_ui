@@ -1,0 +1,61 @@
+
+
+
+
+.formContainer{
+    position: fixed;
+      top: 30%;
+      left: 30%;
+     background-color:grey;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      height: 350;
+      text-align: center;
+   
+    }
+    .inputField{
+        height: 40px;
+        width: 80%;
+        border: 2px solid black;
+        margin-top: 10px;
+    }
+
+    .btnn{
+        margin-top: 20px
+    }
+    .userCardContainer{
+        position:relative;
+        top: 90px;
+        left: 400px;
+        background-color: grey;
+        color: white;
+    }
+    
+    .createPost {
+        background-color: white;
+    top: 4rem;
+        left: 30%; 
+        position: absolute;
+      margin: 25px;
+        width:450px;
+        height: 500px;
+        border: 2px solid black;
+        border-radius: 10px;
+        box-shadow: 60px -10px teal;
+       
+       
+ }
+.createPost label{
+    font-weight: 700;
+    font-size: 20px;
+}
+ .createPostContainer{
+    margin: 10px 10px 10px 10px;
+    
+
+ }
+ .createPost label{
+margin-right: 10px;
+ }
