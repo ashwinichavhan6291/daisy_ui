@@ -6,7 +6,7 @@ const Profile = ({userData,profile}) => {
     <>
    {profile &&
       
-        <div className="flex card bg-base-100 w-96 shadow-xl h-3/5">
+        <div className="flex card bg-base-100 w-96 shadow-xl h-3/5 top-20">
           <figure className="px-10 pt-10">
            
               <img

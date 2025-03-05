@@ -21,22 +21,38 @@ function HomePage() {
   return (
     <>
       <ToastContainer />
-      <motion.div className="flex flex-col md:flex-row min-h-screen">
-       
+      <div className="flex flex-col md:flex-row min-h-screen relative">
+
+        {/* Sidebar Background Overlay */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 md:hidden transition-opacity"
+            onClick={() => setSidebarOpen(false)}
+          ></div>
+        )}
+
         {/* Mobile Sidebar Toggle Button */}
         <button
           className="absolute top-4 left-4 z-50 text-white md:hidden"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
+          onClick={() => setSidebarOpen(true)}
         >
-          {sidebarOpen ? <FiX size={30} /> : <FiMenu size={30} />}
+          <FiMenu size={30} />
         </button>
 
         {/* Sidebar */}
         <motion.div
-          className={`absolute md:relative top-0 left-0 h-screen bg-gray-900 p-5 pt-8 transition-all duration-300 ${
+          className={`fixed md:relative top-0 left-0 h-screen bg-gray-900 p-5 pt-8 w-64 z-50 transition-transform duration-300 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } md:translate-x-0 w-64`}
+          } md:translate-x-0`}
         >
+          {/* Close Button (Mobile Only) */}
+          <button
+            className="absolute top-4 right-4 text-white md:hidden"
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FiX size={30} />
+          </button>
+
           <ul className="mt-10 text-white text-center md:text-left">
             {[
               { name: "Profile", path: "/profileview" },
@@ -53,12 +69,17 @@ function HomePage() {
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Link to={item.path} onClick={() => setSidebarOpen(false)}>{item.name}</Link>
+                <Link
+                  to={item.path}
+                  onClick={() => setSidebarOpen(false)} // Closes sidebar when clicking a link
+                >
+                  {item.name}
+                </Link>
               </motion.li>
             ))}
           </ul>
 
-          {/* Logout Button */}
+          
           <motion.div
             className="mt-5 md:absolute md:bottom-5 md:left-5 flex justify-center md:justify-start text-white"
             whileHover={{ scale: 1.1 }}
@@ -69,14 +90,14 @@ function HomePage() {
           </motion.div>
         </motion.div>
 
-        {/* Hero Section */}
+        
         <motion.div
-          className="hero bg-slate-200 flex flex-col md:flex-row min-h-screen items-center p-5 md:p-10 gap-5 md:gap-10"
+          className="hero bg-slate-200 flex flex-col md:flex-row min-h-screen items-center p-5 md:p-10 gap-5 md:gap-10 w-full"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Hero Text */}
+         
           <div className="hero-content text-center md:text-left w-full md:w-1/2">
             <h1 className="text-3xl md:text-5xl font-bold text-black">
               Let's create something amazing
@@ -85,7 +106,7 @@ function HomePage() {
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis aliquid officia repellendus adipisci assumenda maiores ducimus placeat modi error aut.
             </p>
 
-            {/* Get Started Button */}
+      
             <motion.div whileHover={{ scale: 1.1 }}>
               <Link to="/signup" className="btn btn-primary bg-blue-500 hover:bg-green-500 text-black px-6 py-3 rounded-md">
                 Get Started
@@ -93,7 +114,7 @@ function HomePage() {
             </motion.div>
           </div>
 
-          {/* Hero Image */}
+          
           <div className="w-full md:w-1/3 flex justify-center">
             <motion.img
               src="https://images.pexels.com/photos/4348078/pexels-photo-4348078.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -105,7 +126,7 @@ function HomePage() {
             />
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </>
   );
 }
