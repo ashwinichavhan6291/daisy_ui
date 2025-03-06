@@ -6,9 +6,11 @@ import { addUser } from "../slice/userslice";
 import { ToastContainer, toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { Base_URL } from "../slice/constants";
+import LoadSpinner from "./LoadSpinner";
 
 const Signup = () => {
   const [submitted, setIsSubmitted] = useState(false);
+  let[loader,setLoader]=useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -19,18 +21,24 @@ const Signup = () => {
 
   const handleOnSubmit = async (formData) => {
     try {
+      setLoader(true);
       const res = await axios.post( Base_URL+"/signup", formData, {
         withCredentials:true,
       });
       dispatch(addUser(res.data));
       toast.success(res.data);
       setIsSubmitted(true);
+      setLoader(false);
     } catch (err) {
       toast.error(err.response ? err.response.data : err.message);
+      setLoader(false);
     }
+  
   };
 
   return (
+    <>
+      {loader && <LoadSpinner/>}
     <div className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-50 p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
   <motion.form
     onSubmit={handleSubmit(handleOnSubmit )}
@@ -97,6 +105,8 @@ const Signup = () => {
 </div>
 
 
+    </>
+  
   );
 };
 

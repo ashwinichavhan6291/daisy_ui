@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import { Base_URL } from "../slice/constants";
+import LoadSpinner from "./LoadSpinner";
 
 function Login() {
   const [newPassword, setNewPassword] = useState("");
@@ -13,10 +14,13 @@ function Login() {
   const [emailId, setEmailId] = useState("");
   const [passwordPage, setPasswordPage] = useState(false);
   const dispatch = useDispatch();
+  let[loader,setLoader]=useState(false);
+
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
   const handleLogin = async (data) => {
+    setLoader(true)
     try {
       const response = await axios.post(Base_URL +"/login", data, {
         withCredentials: true,
@@ -26,12 +30,14 @@ function Login() {
      
       setEmailId(data.emailId);
       setValue("emailId", data.emailId);
-
+      setLoader(false)
       toast.success("Login successful!", { position: "top-right", autoClose: 1000 });
       setLogin(true);
     } catch (err) {
       toast.error(err.response?.data || err.message);
+      setLoader(false)
     }
+  
   };
 
   const handlePassword = async (e) => {
@@ -47,6 +53,9 @@ function Login() {
 
   return (
     <>
+    {
+      loader && <LoadSpinner/>
+    }
     <ToastContainer />
     {!login &&
     <div className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-50 p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
@@ -111,7 +120,7 @@ function Login() {
             <p className="text-gray-200 mt-4">
               Forgot password?{" "}
               <motion.button
-                className="text-black underline"
+                className="text-indigo-700 underline"
                 onClick={(e) => { e.preventDefault(); setPasswordPage(true); }}
                 whileHover={{ scale: 1.1 }}
               >
@@ -169,7 +178,6 @@ function Login() {
       </AnimatePresence>
     </motion.form>
   </div>
-  
 
 }
     </>

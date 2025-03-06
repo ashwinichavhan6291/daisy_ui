@@ -2,24 +2,34 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { Base_URL } from "../slice/constants";
+import LoadSpinner from "./LoadSpinner";
 
 function ProfileView() {
   const [profile, setProfile] = useState("");
+  let[loader,setLoader]=useState(false);
 
   const fetchProfile = async () => {
     try {
+      setLoader(true);
       const res = await axios.get(Base_URL + "/profile/view", {
         withCredentials: true,
       });
       setProfile(res.data);
+      setLoader(false);
     } catch (err) {
+      console.error(err.response && err.response.data && err.response.data.error
+        ? err.response.data.error
+        : err.message);
       toast.error(
         err.response && err.response.data && err.response.data.error
           ? err.response.data.error
           : err.message,
-        { autoClose: 1000 }
+        { autoClose: 2000,
+          position:"top-center"
+         }
       );
     }
+    setLoader(false);
   };
 
   useEffect(() => {
@@ -28,6 +38,7 @@ function ProfileView() {
 
   return (
     <>
+    {loader && <LoadSpinner/>}
       <ToastContainer />
       {profile && (
         <div className="card bg-neutral text-neutral-content max-w-xs w-full mx-auto p-4 mt-40">

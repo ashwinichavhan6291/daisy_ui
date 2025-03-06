@@ -5,18 +5,23 @@ import { addFeed, removeFeed } from "../slice/feedSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import { Base_URL } from "../slice/constants";
+import LoadSpinner from "./LoadSpinner";
 
 function UserCard() {
   let [currIndex, setCurrIndex] = useState(0);
+  let[loader,setLoader]=useState(false);
   const feeds = useSelector((store) => store.feed);
   const dispatch = useDispatch();
 
   const handleFeed = async () => {
     try {
+setLoader(true);
       const res = await axios.get(Base_URL + "/feed", { withCredentials: true });
       dispatch(addFeed(res.data.data));
+      setLoader(false);
     } catch (err) {
       console.error(err.response ? err.response.data : err.message);
+      setLoader(false);
     }
   };
 
@@ -37,7 +42,14 @@ function UserCard() {
       toast.success(res.data.message);
       dispatch(removeFeed(userId));
     } catch (err) {
-      toast.error(err.response?.data?.error || err.message);
+      toast.error(
+        err.response && err.response.data && err.response.data.error
+          ? err.response.data.error
+          : err.message,
+        { autoClose: 2000,
+          position:"top-center"
+         }
+      );
     }
   };
   
@@ -53,6 +65,7 @@ function UserCard() {
 
   return (
     <>
+    {loader && <LoadSpinner/>}
       <ToastContainer />
       <div className="flex justify-center items-center min-h-screen px-4 bg-slate-600">
         <AnimatePresence mode="wait">
@@ -62,10 +75,10 @@ function UserCard() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-2xl shadow-lg p-6 text-center w-full max-w-md border border-gray-300"
+            className="bg-white rounded-2xl shadow-lg p-6 text-center max-w-md border border-gray-300"
           >
            
-            <figure className="mb-4">
+            <figure className="mb-4 ">
               <img
                 src={feed.photourl}
                 alt="User"

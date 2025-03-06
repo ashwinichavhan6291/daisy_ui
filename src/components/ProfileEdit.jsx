@@ -33,7 +33,14 @@ function ProfileEdit() {
       toast.success(res.data.message);
       dispatch(addUser(res?.data?.data));
     } catch (err) {
-      toast.error(err.response?.data?.error || err.message);
+     toast.error(
+             err.response && err.response.data && err.response.data.error
+               ? err.response.data.error
+               : err.message,
+             { autoClose: 2000,
+               position:"top-center"
+              }
+           );
     }
   };
 

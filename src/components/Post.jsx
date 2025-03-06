@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addData, removeData } from "../slice/getPostSlice";
 import axios from "axios";
 import { Base_URL } from "../slice/constants";
+import { toast, ToastContainer } from "react-toastify";
+
 
 function Post() {
   const posts = useSelector((store) => store.getPostData);
@@ -12,8 +14,15 @@ function Post() {
     try {
       const res = await axios.get(Base_URL + "/getPost", { withCredentials: true });
       dispatch(addData(res.data));
-    } catch (error) {
-      console.error("Error fetching posts:", error.message);
+    } catch (err) {
+      toast.error(
+              err.response && err.response.data && err.response.data.error
+                ? err.response.data.error
+                : err.message,
+              { autoClose: 2000,
+                position:"top-center"
+               }
+            );
     }
   };
 
@@ -36,6 +45,7 @@ function Post() {
 
   return (
     <div className="container mx-auto p-4">
+      <ToastContainer/>
       {posts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {[...posts].reverse().map((post) => (

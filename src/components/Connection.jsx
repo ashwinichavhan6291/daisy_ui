@@ -1,23 +1,33 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addConnection } from "../slice/connection";
 import { toast, ToastContainer } from "react-toastify";
 import { Base_URL } from "../slice/constants";
+import LoadSpinner from "./LoadSpinner";
 
 function Connection() {
+  let[loader,setLoader]=useState(false);
   const connections = useSelector((store) => store.connection);
   const dispatch = useDispatch();
 
   const fetchConnection = async () => {
     try {
+      setLoader(true);
       const res = await axios.get(Base_URL + "/user/connections", {
         withCredentials: true,
       });
       dispatch(addConnection(res.data.data));
+      setLoader(false);
     } catch (err) {
-      toast.error(err.response?.data?.error || err.message);
+      toast.error(
+        err.response && err.response.data && err.response.data.error
+          ? err.response.data.error
+          : err.message,
+        { autoClose: 2000, position: "top-center" }
+      );
     }
+    setLoader(false);
   };
 
   useEffect(() => {
@@ -27,6 +37,7 @@ function Connection() {
   return (
     <>
       <ToastContainer />
+      {loader && <LoadSpinner/>}
       {!connections || connections.length === 0 ? (
         <div className="flex flex-col items-center card bg-base-100 w-96 shadow-xl p-6">
           <h2 className="text-2xl font-light">No connection found</h2>
@@ -54,10 +65,14 @@ function Connection() {
                   />
                 </figure>
                 <div className="card-body text-center">
-                  <h2 className="card-title">{con.firstName + " " + con.lastName}</h2>
+                  <h2 className="card-title">
+                    {con.firstName + " " + con.lastName}
+                  </h2>
                   <p>{con.skills}</p>
                   <p>{con.about}</p>
-                  <p>{con.age} {con.gender}</p>
+                  <p>
+                    {con.age} {con.gender}
+                  </p>
                 </div>
               </div>
             ))}
