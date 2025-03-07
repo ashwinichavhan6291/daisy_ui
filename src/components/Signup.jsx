@@ -7,10 +7,12 @@ import { ToastContainer, toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { Base_URL } from "../slice/constants";
 import LoadSpinner from "./LoadSpinner";
+import { FaWindowClose } from "react-icons/fa";
 
 const Signup = () => {
-  const [submitted, setIsSubmitted] = useState(false);
+  
   let[loader,setLoader]=useState(false);
+  let[isOpen,setIsOpen]=useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -27,8 +29,9 @@ const Signup = () => {
       });
       dispatch(addUser(res.data));
       toast.success(res.data);
-      setIsSubmitted(true);
+      
       setLoader(false);
+      
     } catch (err) {
       toast.error(err.response ? err.response.data : err.message);
       setLoader(false);
@@ -39,7 +42,13 @@ const Signup = () => {
   return (
     <>
       {loader && <LoadSpinner/>}
+
+      {!isOpen &&
     <div className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-50 p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+
+
+ 
+{/* </div> */}
   <motion.form
     onSubmit={handleSubmit(handleOnSubmit )}
     className="bg-black/30 backdrop-blur-md p-6 sm:p-8 rounded-xl shadow-lg w-11/12 max-w-md min-h-[350px] text-center"
@@ -47,6 +56,12 @@ const Signup = () => {
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5 }}
   >
+    <div
+  className="realtive float-right mt-[-30px] mr-[-18px] w-3 h-6 cursor-pointer"
+  onClick={() => setIsOpen(true)}
+>
+     <FaWindowClose className=" bg-slate-200" />
+     </div>
     <h2 className="text-white text-2xl font-bold mb-6">Sign Up</h2>
 
     <div className="mb-4">
@@ -103,7 +118,7 @@ const Signup = () => {
     </motion.button>
   </motion.form>
 </div>
-
+}
 
     </>
   

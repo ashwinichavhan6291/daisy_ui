@@ -5,11 +5,13 @@ import { addFeed, removeFeed } from "../slice/feedSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import { Base_URL } from "../slice/constants";
+import { Search} from "lucide-react";
 import LoadSpinner from "./LoadSpinner";
 
 function UserCard() {
   let [currIndex, setCurrIndex] = useState(0);
   let[loader,setLoader]=useState(false);
+  let[searchUser,setSearchUser]=useState("");
   const feeds = useSelector((store) => store.feed);
   const dispatch = useDispatch();
 
@@ -61,10 +63,28 @@ setLoader(true);
   if (currIndex >= feeds.length)
     return <p className="text-center text-gray-500">No more users</p>;
 
-  const feed = feeds[currIndex];
+  // const feed = feeds[currIndex];
 
+  const filterFeeds=feeds.filter((feed)=>{
+    return feed.firstName.toLowerCase().includes(searchUser.toLowerCase());
+  })
+  if(filterFeeds.length===0) return <p className="text-center mt-20 text-2xl font-bold">no such user found</p>
+const feed=filterFeeds[currIndex];
   return (
     <>
+<div className="relative">
+  <Search className="absolute left-3 top-2 text-gray-400" />
+  <input
+    type="text"
+    placeholder="Search..."
+    value={searchUser}
+    onChange={(e) => setSearchUser(e.target.value)}
+    className="border border-gray-300 rounded-md px-3 py-2 pl-10 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
+
+
+
     {loader && <LoadSpinner/>}
       <ToastContainer />
       <div className="flex justify-center items-center min-h-screen px-4 bg-slate-600">

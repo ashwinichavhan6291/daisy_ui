@@ -13,6 +13,7 @@ import ProfileEdit from './components/ProfileEdit.jsx';
 import Requests from './components/Requests.jsx';
 import Connection from './components/Connection.jsx';
 import ProfileView from './components/ProfileView.jsx';
+import Postfeed from './components/Postfeed.jsx';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -28,6 +29,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/profile' element={<ProfileEdit/>} />
         <Route path='/request' element={<Requests/>} />
         <Route path='/connection' element={<Connection/>} />
+        <Route path="/postfeed" element={<Postfeed/>}/>
         
       </Route>
     </Routes>

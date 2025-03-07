@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import { Base_URL } from "../slice/constants";
 import LoadSpinner from "./LoadSpinner";
+import { FaWindowClose } from "react-icons/fa";
 
 function Login() {
   const [newPassword, setNewPassword] = useState("");
@@ -66,6 +67,12 @@ function Login() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     >
+      <div
+        className="realtive float-right mt-[-30px] mr-[-18px] w-3 h-6 cursor-pointer"
+        onClick={() => setIsOpen(true)}
+      >
+           <FaWindowClose className=" bg-slate-200" />
+           </div>
       <motion.h2
         className="text-white text-2xl font-bold mb-6"
         initial={{ opacity: 0, y: -20 }}

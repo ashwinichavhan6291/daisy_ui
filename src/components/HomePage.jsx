@@ -25,7 +25,7 @@ function HomePage() {
   return (
     <>
       <ToastContainer />
-      <div className="flex flex-col md:flex-row min-h-screen relative z-0 overflow-y-hidden">
+      <div className="flex flex-col md:flex-row min-h-screen relative z-0  overflow-hidden">
     
         {sidebarOpen && (
           <div
@@ -48,7 +48,7 @@ function HomePage() {
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0`}
         >
-          {/* Close Button (Mobile Only) */}
+       
           <button
             className="absolute top-10 right-4 text-white md:hidden"
             onClick={() => setSidebarOpen(false)}
@@ -91,13 +91,14 @@ function HomePage() {
         </motion.div>
 
         <motion.div
-          className="hero bg-slate-200 flex flex-col md:flex-row min-h-screen p-5 md:p-10 gap-5 md:gap-10 overflow-hidden"
+          className="hero bg-slate-200 flex  w-screen flex-col md:flex-row min-h-screen p-6 md:p-10 gap-5 md:gap-10"
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+          animate={{ opacity: 1, scale:1 }}
+          transition={{ duration: 0.8,ease: "easeOut" }}
         >
-         <div className="hero-content flex flex-col items-center text-center w-full">
-  <h1 className="text-3xl md:text-5xl font-bold text-black">
+      
+         <div className="hero-content flex flex-col items-center text-center w-full ">
+  <h1 className="text-3xl md:text-5xl font-bold text-black top-44">
     Let's create something amazing
   </h1>
   <p className="py-4 md:py-6 text-lg md:text-3xl">
@@ -106,6 +107,7 @@ function HomePage() {
     placeat modi error aut.
   </p>
 </div>
+
 
 
           <div className="pt-20 w-full md:w-1/2 flex justify-center">
