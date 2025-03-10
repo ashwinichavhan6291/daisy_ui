@@ -66,7 +66,7 @@ setLoader(true);
   // const feed = feeds[currIndex];
 
   const filterFeeds=feeds.filter((feed)=>{
-    return feed.firstName.toLowerCase().includes(searchUser.toLowerCase());
+    return feed.firstName.toLowerCase().startsWith(searchUser.toLowerCase());
   })
   if(filterFeeds.length===0) return <p className="text-center mt-20 text-2xl font-bold">no such user found</p>
 const feed=filterFeeds[currIndex];
