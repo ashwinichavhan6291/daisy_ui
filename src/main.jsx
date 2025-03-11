@@ -14,6 +14,7 @@ import Requests from './components/Requests.jsx';
 import Connection from './components/Connection.jsx';
 import ProfileView from './components/ProfileView.jsx';
 import Postfeed from './components/Postfeed.jsx';
+import Userprofile from './components/Userprofile.jsx';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -30,6 +31,10 @@ createRoot(document.getElementById('root')).render(
         <Route path='/request' element={<Requests/>} />
         <Route path='/connection' element={<Connection/>} />
         <Route path="/postfeed" element={<Postfeed/>}/>
+        <Route path="/profile/:userId" element={<Userprofile/>}/>
+        {/* <Route path="/userProfile" element={<Userprofile/>}/> */}
+        
+
         
       </Route>
     </Routes>

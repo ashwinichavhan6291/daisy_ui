@@ -5,6 +5,7 @@ import axios from "axios";
 import Profile from "./Profile";
 import { ToastContainer, toast } from "react-toastify";
 import { Base_URL } from "../slice/constants";
+import { useNavigate } from "react-router-dom";
 
 function ProfileEdit() {
   const user = useSelector((store) => store.user);
@@ -18,6 +19,7 @@ function ProfileEdit() {
   let [photourl, setPhotourl] = useState(user.photourl);
   let [skills, setSkills] = useState(user.skills);
   let [profile, setProfile] = useState(true);
+  const navigate=useNavigate();
 
   const saveProfile = async () => {
     try {
@@ -31,6 +33,7 @@ function ProfileEdit() {
 
       setProfile(true);
       toast.success(res.data.message);
+      navigate("/profileview")
       dispatch(addUser(res?.data?.data));
     } catch (err) {
      toast.error(

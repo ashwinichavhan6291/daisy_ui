@@ -56,25 +56,27 @@ function HomePage() {
             <FiX size={30} />
           </button>
 
-          <ul className="mt-10 text-white text-center md:text-left">
+          <ul className="mt-2 text-white text-center md:text-left">
             {[
               { name: "Profile", path: "/profileview" },
               { name: "Edit Profile", path: "/profile" },
               { name: "Posts", path: "/post" },
+              {name: "post feed" , path : "/postfeed"},
               { name: "Create Post", path: "/createpost" },
               { name: "Users", path: "/usercard" },
               { name: "Requests", path: "/request" },
               { name: "Connections", path: "/connection" },
+            
             ].map((item, index) => (
               <motion.li
                 key={index}
-                className="mt-4 md:mt-10 hover:text-blue-400"
+                className="mt-4 md:mt-5 hover:text-blue-400"
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <Link
                   to={item.path}
-                  onClick={() => setSidebarOpen(false)} // Closes sidebar when clicking a link
+                  onClick={() => setSidebarOpen(false)}
                 >
                   {item.name}
                 </Link>
@@ -83,7 +85,7 @@ function HomePage() {
           </ul>
 
           <li
-            className="text-white list-none mt-4 md:mt-10 hover:text-blue-400 text-center md:text-left cursor-pointer"
+            className="text-red-600 list-none mt-3 md:mt-10 hover:text-blue-400 text-center md:text-left cursor-pointer"
             onClick={handleLogout}
           >
             Logout

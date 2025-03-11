@@ -17,7 +17,8 @@ function Header({ setShowSignup, setShowLogin, showLogin, showSignup }) {
         📜 Posts
       </motion.button>
 
-      <div className="flex gap-3 ml-auto">
+       <div className="flex gap-3 ml-auto">
+      
         <motion.button
           className="btn btn-sm rounded-badge"
           onClick={() => setShowLogin(!showLogin)}
@@ -35,7 +36,9 @@ function Header({ setShowSignup, setShowLogin, showLogin, showSignup }) {
         >
           Sign Up
         </motion.button>
+
       </div>
+
     </motion.div>
   );
 }

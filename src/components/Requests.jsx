@@ -34,10 +34,10 @@ function Requests() {
     setLoader(false);
   };
 
-  const handleRequests = async (status, _id) => {
+ const handleRequests = async (status, _id)=> {
     try {
-      setLoader(true);
-      const res = await axios.post(
+       
+       const res = await axios.post(
         `${Base_URL}/request/review/${status}/${_id}`,
         {},
         {
@@ -45,18 +45,18 @@ function Requests() {
           withCredentials: true,
         }
       );
-
+  
       dispatch(removeRequest(_id));
-      setLoader(false);
+       setLoader(false);
     } catch (err) {
-      toast.error(
-        err.response && err.response.data && err.response.data.error
-          ? err.response.data.error
-          : err.message
-      );
-    }
-    setLoader(false);
-  };
+       toast.error(
+         err.response && err.response.data && err.response.data.error
+           ? err.response.data.error
+           : err.message
+       );
+     }
+   };
+
 
   useEffect(() => {
     viewRequest();
@@ -141,3 +141,4 @@ function Requests() {
 }
 
 export default Requests;
+

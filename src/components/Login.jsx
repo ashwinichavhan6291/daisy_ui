@@ -16,11 +16,13 @@ function Login() {
   const [passwordPage, setPasswordPage] = useState(false);
   const dispatch = useDispatch();
   let[loader,setLoader]=useState(false);
+ 
 
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
   const handleLogin = async (data) => {
+    
     setLoader(true)
     try {
       const response = await axios.post(Base_URL +"/login", data, {
@@ -58,8 +60,8 @@ function Login() {
       loader && <LoadSpinner/>
     }
     <ToastContainer />
-    {!login &&
-    <div className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-50 p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
+    {(!login) &&
+    (<div className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-50 p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
     <motion.form
       onSubmit={handleSubmit(handleLogin)}
       className="bg-black/30 backdrop-blur-md p-6 sm:p-8 rounded-xl shadow-lg w-11/12 max-w-md min-h-[350px] text-center "
@@ -69,7 +71,7 @@ function Login() {
     >
       <div
         className="realtive float-right mt-[-30px] mr-[-18px] w-3 h-6 cursor-pointer"
-        onClick={() => setIsOpen(true)}
+        onClick={() =>setLogin(true)}
       >
            <FaWindowClose className=" bg-slate-200" />
            </div>
@@ -184,7 +186,7 @@ function Login() {
         )}
       </AnimatePresence>
     </motion.form>
-  </div>
+  </div>)
 
 }
     </>

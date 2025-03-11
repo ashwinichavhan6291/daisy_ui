@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Base_URL } from "../slice/constants";
 import { Search} from "lucide-react";
 import LoadSpinner from "./LoadSpinner";
-
+import {handleRequest} from "../utils/Requests"
 function UserCard() {
   let [currIndex, setCurrIndex] = useState(0);
   let[loader,setLoader]=useState(false);
@@ -31,29 +31,29 @@ setLoader(true);
     handleFeed();
   }, []);
 
-  const handleRequest = async (status, userId) => {
+  // const handleRequest = async (status, userId) => {
     
-    handleUser(); 
+  //   handleUser(); 
   
-    try {
-      const res = await axios.post(
-        `${Base_URL}/request/send/${status}/${userId}`,
-        {},
-        { headers: { "Content-Type": "application/json" }, withCredentials: true }
-      );
-      toast.success(res.data.message);
-      dispatch(removeFeed(userId));
-    } catch (err) {
-      toast.error(
-        err.response && err.response.data && err.response.data.error
-          ? err.response.data.error
-          : err.message,
-        { autoClose: 2000,
-          position:"top-center"
-         }
-      );
-    }
-  };
+  //   try {
+  //     const res = await axios.post(
+  //       `${Base_URL}/request/send/${status}/${userId}`,
+  //       {},
+  //       { headers: { "Content-Type": "application/json" }, withCredentials: true }
+  //     );
+  //     toast.success(res.data.message);
+  //     dispatch(removeFeed(userId));
+  //   } catch (err) {
+  //     toast.error(
+  //       err.response && err.response.data && err.response.data.error
+  //         ? err.response.data.error
+  //         : err.message,
+  //       { autoClose: 2000,
+  //         position:"top-center"
+  //        }
+  //     );
+  //   }
+  // };
   
 
   const handleUser = () => {
@@ -70,6 +70,9 @@ setLoader(true);
   })
   if(filterFeeds.length===0) return <p className="text-center mt-20 text-2xl font-bold">no such user found</p>
 const feed=filterFeeds[currIndex];
+
+
+
   return (
     <>
 <div className="relative">
@@ -122,13 +125,13 @@ const feed=filterFeeds[currIndex];
             <div className="mt-4 flex flex-wrap justify-center gap-3">
               <button
                 className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-600 transition"
-                onClick={() => handleRequest("interested", feed._id)}
+                onClick={() => handleRequest("interested", feed._id,dispatch)}
               >
                 Interest
               </button>
               <button
                 className="px-4 py-2 bg-pink-400 text-white rounded-lg hover:bg-pink-600 transition"
-                onClick={() => handleRequest("ignored", feed._id)}
+                onClick={() => handleRequest("ignored", feed._id, dispatch)}
               >
                 Ignore
               </button>
@@ -147,3 +150,4 @@ const feed=filterFeeds[currIndex];
 }
 
 export default UserCard;
+
