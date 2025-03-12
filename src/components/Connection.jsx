@@ -5,6 +5,7 @@ import { addConnection } from "../slice/connection";
 import { toast, ToastContainer } from "react-toastify";
 import { Base_URL } from "../slice/constants";
 import LoadSpinner from "./LoadSpinner";
+import { Link } from "react-router-dom";
 
 function Connection() {
   let[loader,setLoader]=useState(false);
@@ -73,10 +74,14 @@ function Connection() {
                   <p>
                     {con.age} {con.gender}
                   </p>
+                  <button className="btn btn-primary">
+                    <Link to={`/chat/${con._id}`}>Chat</Link>
+                  </button>
                 </div>
               </div>
             ))}
           </div>
+          
         </div>
       )}
     </>

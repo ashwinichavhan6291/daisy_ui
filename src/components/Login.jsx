@@ -30,6 +30,7 @@ function Login() {
       }); 
 
       dispatch(addUser(response.data));
+      console.log("response on login" , response.data);
      
       setEmailId(data.emailId);
       setValue("emailId", data.emailId);
