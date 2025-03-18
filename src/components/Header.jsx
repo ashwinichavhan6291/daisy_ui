@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 function Header({ setShowSignup, setShowLogin, showLogin, showSignup,showHeaderbtn }) {
-  let[showLoginbtn,setShowLoginbtn]=useState(false);
 
   return (
     <motion.div
