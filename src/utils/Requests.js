@@ -17,9 +17,7 @@ export const handleRequest = async (status, userId,dispatch) => {
     );
     toast.success(res.data.message);
 
-    console.log("data " , res.data);
-    
-    dispatch(removeFeed(userId));
+ dispatch(removeFeed(userId));
   } catch (err) {
    
   const errorMessage =

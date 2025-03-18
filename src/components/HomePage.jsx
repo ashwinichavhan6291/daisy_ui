@@ -1,12 +1,12 @@
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer,toast} from "react-toastify";
 import { motion } from "framer-motion";
 import { Base_URL } from "../slice/constants";
 import { FiMenu, FiX } from "react-icons/fi";
 
-function HomePage() {
+function HomePage({close,setClose,setshowHeaderbtn}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -17,10 +17,16 @@ function HomePage() {
         { withCredentials: true }
       );
       toast.success(res.data);
+      setshowHeaderbtn(false);
+      
+      // setSuccessToast(true);
+
     } catch (err) {
       console.error(err.response ? err.response.data : err.message);
     }
   };
+  
+
 
   return (
     <>
@@ -37,11 +43,18 @@ function HomePage() {
      
         <button
           className="absolute top-20 left-4 z-50 text-white md:hidden"
-          onClick={() => setSidebarOpen(true)}
-        >
-          <FiMenu size={30} />
-        </button>
+          onClick={() =>
+            { setClose(true);
+              setSidebarOpen(true);
+              
+            }
 
+          }
+        >
+          <FiMenu size={30} style={{color : "black"}}/>
+        </button>
+     
+        
         {/* Sidebar */}
         <motion.div
           className={`fixed md:relative top-10 left-0 max-h-full bg-gray-900 p-5 pt-8 w-64 z-10 transition-transform duration-300 ${
@@ -93,14 +106,14 @@ function HomePage() {
         </motion.div>
 
         <motion.div
-          className="hero bg-slate-200 flex  w-screen flex-col md:flex-row min-h-screen p-6 md:p-10 gap-5 md:gap-10"
+          className="hero bg-slate-200 flex  w-screen flex-col md:flex-row min-h-screen p-6 md:p-1 gap-2 md:gap-10 "
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale:1 }}
           transition={{ duration: 0.8,ease: "easeOut" }}
         >
       
-         <div className="hero-content flex flex-col items-center text-center w-full ">
-  <h1 className="text-3xl md:text-5xl font-bold text-black top-44">
+         <div className="hero-content flex flex-col items-center text-center w-full pt-20">
+  <h1 className="text-3xl md:text-5xl font-bold text-black top-44 ">
     Let's create something amazing
   </h1>
   <p className="py-4 md:py-6 text-lg md:text-3xl">
@@ -112,7 +125,7 @@ function HomePage() {
 
 
 
-          <div className="pt-20 w-full md:w-1/2 flex justify-center">
+          <div className="pt-10 w-full md:w-1/2 flex justify-center">
             <motion.img
               src="https://images.pexels.com/photos/4348078/pexels-photo-4348078.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               alt="post"

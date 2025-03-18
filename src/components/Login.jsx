@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { addUser } from "../slice/userslice";
 import { useDispatch } from "react-redux";
@@ -8,14 +8,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Base_URL } from "../slice/constants";
 import LoadSpinner from "./LoadSpinner";
 import { FaWindowClose } from "react-icons/fa";
+import {useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({setshowHeaderbtn,close,setClose}) {
   const [newPassword, setNewPassword] = useState("");
-  const[login,setLogin]=useState(false);
+  // const[login,setLogin]=useState(false);
   const [emailId, setEmailId] = useState("");
   const [passwordPage, setPasswordPage] = useState(false);
+
   const dispatch = useDispatch();
+  const navigate=useNavigate();
   let[loader,setLoader]=useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
  
 
 
@@ -30,13 +34,16 @@ function Login() {
       }); 
 
       dispatch(addUser(response.data));
-      console.log("response on login" , response.data);
+      
      
       setEmailId(data.emailId);
       setValue("emailId", data.emailId);
-      setLoader(false)
-      toast.success("Login successful!", { position: "top-right", autoClose: 1000 });
-      setLogin(true);
+      setLoader(false);
+setshowHeaderbtn(true);
+   
+      setClose(true);
+      setLoginSuccess(true);
+  // navigate("/usercard");
     } catch (err) {
       toast.error(err.response?.data || err.message);
       setLoader(false)
@@ -44,6 +51,12 @@ function Login() {
   
   };
 
+  useEffect(()=>{
+    if(loginSuccess){
+      toast.success("Login successful!", { position: "top-right", autoClose: 1000 });
+      setLoginSuccess(false);
+    }
+  },[loginSuccess])
   const handlePassword = async (e) => {
     e.preventDefault();
     try {
@@ -57,11 +70,12 @@ function Login() {
 
   return (
     <>
+    
     {
       loader && <LoadSpinner/>
     }
     <ToastContainer />
-    {(!login) &&
+    {(!close) &&
     (<div className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-50 p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
     <motion.form
       onSubmit={handleSubmit(handleLogin)}
@@ -72,7 +86,7 @@ function Login() {
     >
       <div
         className="realtive float-right mt-[-30px] mr-[-18px] w-3 h-6 cursor-pointer"
-        onClick={() =>setLogin(true)}
+        onClick={() =>setClose(true)}
       >
            <FaWindowClose className=" bg-slate-200" />
            </div>

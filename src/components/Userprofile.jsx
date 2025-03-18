@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { handleRequest} from "../utils/Requests";
 import LoadSpinner from "./LoadSpinner";
+import { Base_URL } from "../slice/constants";
 
 function Userprofile() {
   const { userId } = useParams();
@@ -19,11 +20,11 @@ function Userprofile() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:7777/profile/${userId}`, {
+        const res = await axios.get(`${Base_URL}/profile/${userId}`, {
           withCredentials: true,
         });
-        console.log(res.data);
-        console.log("id" , res.data._id);
+        
+     
         setUser(res.data);
       } catch (err) {
         console.error(err.message);

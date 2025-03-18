@@ -75,14 +75,14 @@ const feed=filterFeeds[currIndex];
 
   return (
     <>
-<div className="relative">
-  <Search className="absolute left-3 top-2 text-gray-400" />
+<div className="relative p-10">
+  <Search className="absolute left-12 top-12 text-gray-400" />
   <input
     type="text"
     placeholder="Search..."
     value={searchUser}
     onChange={(e) => setSearchUser(e.target.value)}
-    className="border border-gray-300 rounded-md px-3 py-2 pl-10 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+    className="border border-gray-300 rounded-md px-3 py-2 pl-10 w-full focus:outline-none focus:ring-2 focus:ring-gray-700"
   />
 </div>
 
@@ -90,7 +90,7 @@ const feed=filterFeeds[currIndex];
 
     {loader && <LoadSpinner/>}
       <ToastContainer />
-      <div className="flex justify-center items-center min-h-screen px-4 bg-slate-600">
+      <div className=" flex justify-center items-center px-4 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={feed._id}
@@ -98,7 +98,7 @@ const feed=filterFeeds[currIndex];
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-2xl shadow-lg p-6 text-center max-w-md border border-gray-300"
+            className="bg-slate-200 rounded-2xl shadow-lg p-6 text-center max-w-md border border-gray-300"
           >
            
             <figure className="mb-4 ">
@@ -124,7 +124,7 @@ const feed=filterFeeds[currIndex];
          
             <div className="mt-4 flex flex-wrap justify-center gap-3">
               <button
-                className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-600 transition"
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
                 onClick={() => handleRequest("interested", feed._id,dispatch)}
               >
                 Interest

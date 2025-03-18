@@ -9,10 +9,10 @@ import { Base_URL } from "../slice/constants";
 import LoadSpinner from "./LoadSpinner";
 import { FaWindowClose } from "react-icons/fa";
 
-const Signup = () => {
+const Signup = ({setshowHeaderbtn,close,setClose}) => {
   
   let[loader,setLoader]=useState(false);
-  let[isOpen,setIsOpen]=useState(false);
+  // let[isOpen,setIsOpen]=useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -29,7 +29,8 @@ const Signup = () => {
       });
       dispatch(addUser(res.data));
       toast.success(res.data);
-      
+      setshowHeaderbtn(true);
+      setClose(true);
       setLoader(false);
       
     } catch (err) {
@@ -43,7 +44,7 @@ const Signup = () => {
     <>
       {loader && <LoadSpinner/>}
 
-      {!isOpen &&
+      {!close &&
     <div className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-50 p-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
 
 
@@ -58,7 +59,7 @@ const Signup = () => {
   >
     <div
   className="realtive float-right mt-[-30px] mr-[-18px] w-3 h-6 cursor-pointer"
-  onClick={() => setIsOpen(true)}
+  onClick={() => setClose(true)}
 >
      <FaWindowClose className=" bg-slate-200" />
      </div>

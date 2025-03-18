@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-function Header({ setShowSignup, setShowLogin, showLogin, showSignup }) {
+function Header({ setShowSignup, setShowLogin, showLogin, showSignup,showHeaderbtn }) {
+  let[showLoginbtn,setShowLoginbtn]=useState(false);
+
   return (
     <motion.div
       className="navbar bg-neutral text-neutral-content flex flex-wrap justify-between items-center p-4 fixed w-full z-10"
@@ -9,6 +11,7 @@ function Header({ setShowSignup, setShowLogin, showLogin, showSignup }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
+     
       <motion.button
         className="btn btn-ghost text-xl left-10 top-9"
         whileHover={{ scale: 1.1 }}
@@ -16,7 +19,7 @@ function Header({ setShowSignup, setShowLogin, showLogin, showSignup }) {
       >
         📜 Posts
       </motion.button>
-
+      {!showHeaderbtn && 
        <div className="flex gap-3 ml-auto">
       
         <motion.button
@@ -38,7 +41,7 @@ function Header({ setShowSignup, setShowLogin, showLogin, showSignup }) {
         </motion.button>
 
       </div>
-
+}
     </motion.div>
   );
 }

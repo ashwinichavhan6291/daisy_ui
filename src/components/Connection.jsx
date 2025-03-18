@@ -40,7 +40,7 @@ function Connection() {
       <ToastContainer />
       {loader && <LoadSpinner/>}
       {!connections || connections.length === 0 ? (
-        <div className="flex flex-col items-center card bg-base-100 w-96 shadow-xl p-6">
+        <div className="flex flex-col items-center card bg-base-100 w-96 shadow-xl p-10">
           <h2 className="text-2xl font-light">No connection found</h2>
           <figure className="px-10 pt-6">
             <img

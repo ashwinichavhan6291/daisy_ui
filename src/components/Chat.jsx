@@ -17,16 +17,12 @@ function Chat() {
   const[newMessage,setNewMessage]=useState("");
 
 
-
-  
-  
-  
   useEffect(()=>{
     const socket=createSocketConnection();
 
     socket.emit("joinchat",{firstName: userdata.data.user.firstName ,userId,targetUserId})
     socket.on("receivedMessage", ({ firstName, text }) => {
-      console.log(firstName + " : " + text);
+    
       setMessage((message)=>[...message,{firstName, text}])
     });
     return()=>{

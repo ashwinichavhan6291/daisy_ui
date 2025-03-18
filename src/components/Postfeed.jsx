@@ -4,18 +4,19 @@ import { toast, ToastContainer } from "react-toastify";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+import {Base_URL} from "../slice/constants";
 function Postfeed() {
   let [post, setPost] = useState([]);
-
   const navigate = useNavigate();
 
   const handlePostfeeds = async () => {
     try {
-      const feeds = await axios.get("http://localhost:7777/postfeed", {
+      const feeds = await axios.get(`${Base_URL}/postfeed`, {
         withCredentials: true,
       });
-      console.log(feeds.data);
+ 
       setPost(feeds.data);
+    
     } catch (err) {
       toast.error(
         err.response && err.response.data
@@ -25,23 +26,29 @@ function Postfeed() {
     }
   };
 
+  
+
   const handleLike = async (id) => {
     try {
-      await axios.post(
-        `http://localhost:7777/post/${id}/like`,
+      const res=await axios.post(
+        `${Base_URL}/post/${id}/like`,
         {},
         { withCredentials: true }
       );
       handlePostfeeds();
+
+    toast.success(res.data.message,{autoClose : 2000});
     } catch (err) {
-      console.error(err.response?.data?.error || err.message);
+      toast.error(err.response && err.response.data && err.response.data.message
+        ? err.response.data.message
+        : err.message,{autoClose:2000});
     }
   };
 
   const handleDislike = async (id) => {
     try {
       await axios.post(
-        `http://localhost:7777/post/${id}/dislike`,
+        `${Base_URL}/post/${id}/dislike`,
         {},
         { withCredentials: true }
       );
@@ -54,6 +61,9 @@ function Postfeed() {
   useEffect(() => {
     handlePostfeeds();
   }, []);
+
+
+  
 
   return (
     <>
@@ -81,19 +91,19 @@ function Postfeed() {
                   <p className="overflow-auto break-words">{post.postContent}</p>
                   <div className="card-actions flex justify-between items-center cursor-pointer">
                     <div
-                      className={post.like ? "text-red-600" : "text-gray-600"}
+                      className={post.likes ? "text-red-600" : "text-gray-600"}
                       onClick={() => handleLike(post._id)}
                     >
                       <ThumbsUp />
-                      <p>{post.like}</p>
+                      <p>{post.likes}</p>
                     </div>
 
                     <div
-                      className={post.dislike ? "text-blue-600" : "text-gray-600"}
+                      className={post.dislikes ? "text-blue-600" : "text-gray-600"}
                       onClick={() => handleDislike(post._id)}
                     >
                       <ThumbsDown />
-                      <p>{post.dislike}</p>
+                      <p>{post.dislikes}</p>
                     </div>
                   </div>
                 </div>
