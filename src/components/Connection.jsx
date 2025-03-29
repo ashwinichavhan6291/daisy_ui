@@ -74,9 +74,7 @@ function Connection() {
                   <p>
                     {con.age} {con.gender}
                   </p>
-                  <button className="btn btn-primary">
-                    <Link to={`/chat/${con._id}`}>Chat</Link>
-                  </button>
+                  
                 </div>
               </div>
             ))}

@@ -15,7 +15,7 @@ import Connection from './components/Connection.jsx';
 import ProfileView from './components/ProfileView.jsx';
 import Postfeed from './components/Postfeed.jsx';
 import Userprofile from './components/Userprofile.jsx';
-import Chat from './components/Chat.jsx';
+// import Chat from './components/Chat.jsx';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -33,7 +33,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/connection' element={<Connection/>} />
         <Route path="/postfeed" element={<Postfeed/>}/>
         <Route path="/profile/:userId" element={<Userprofile/>}/>
-        <Route path="/chat/:targetUserId" element={<Chat/>}/>
+        {/* <Route path="/chat/:targetUserId" element={<Chat/>}/> */}
         
 
         
