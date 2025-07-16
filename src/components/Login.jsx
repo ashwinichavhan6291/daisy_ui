@@ -57,6 +57,7 @@ setshowHeaderbtn(true);
       setLoginSuccess(false);
     }
   },[loginSuccess])
+  
   const handlePassword = async (e) => {
     e.preventDefault();
     try {
@@ -114,7 +115,8 @@ setshowHeaderbtn(true);
                 className="w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
                 {...register("emailId", { required: "Email is required" })}
                 value={emailId}
-                onChange={(e) => { setEmailId(e.target.value); setValue("emailId", e.target.value); }}
+                onChange={(e) => { setEmailId(e.target.value); 
+                  setValue("emailId", e.target.value); }}
                 placeholder="Enter Email Address"
                 whileFocus={{ scale: 1.05 }}
               />
@@ -164,6 +166,7 @@ setshowHeaderbtn(true);
               <input
                 type="email"
                 className="w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
+                placeholder="Enter Email Address"
                 value={emailId}
                 onChange={(e) => setEmailId(e.target.value)}
               />

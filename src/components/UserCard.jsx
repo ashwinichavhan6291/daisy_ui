@@ -31,31 +31,6 @@ setLoader(true);
     handleFeed();
   }, []);
 
-  // const handleRequest = async (status, userId) => {
-    
-  //   handleUser(); 
-  
-  //   try {
-  //     const res = await axios.post(
-  //       `${Base_URL}/request/send/${status}/${userId}`,
-  //       {},
-  //       { headers: { "Content-Type": "application/json" }, withCredentials: true }
-  //     );
-  //     toast.success(res.data.message);
-  //     dispatch(removeFeed(userId));
-  //   } catch (err) {
-  //     toast.error(
-  //       err.response && err.response.data && err.response.data.error
-  //         ? err.response.data.error
-  //         : err.message,
-  //       { autoClose: 2000,
-  //         position:"top-center"
-  //        }
-  //     );
-  //   }
-  // };
-  
-
   const handleUser = () => {
     setCurrIndex((prev) => (prev + 1) % feeds.length);
   };
